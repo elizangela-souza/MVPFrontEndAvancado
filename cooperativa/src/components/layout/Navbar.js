@@ -7,22 +7,22 @@ import logo from '../../img/logo.png';
 
 function Navbar() {
     return (
-        <nav class={styles.navbar}>
+        <nav className={styles.navbar}>
             <Container customClass="min-height">
                 <Link to="/">
                     <img src={logo} alt="Banner com a logo da coopperativa de reciclagem" />
                 </Link>
                 <ul class={styles.list}>
-                    <li class={styles.item}>
+                    <li className={styles.item}>
                         <Link to="/">Início</Link>
                     </li>
-                    <li class={styles.item}>
+                    <li className={styles.item}>
                         <Link to="/cooperado">Cooperado</Link>
                     </li>
-                    <li class={styles.item}>
+                    <li className={styles.item}>
                         <Link to="/estoque">Estoque</Link>
                     </li>
-                    <li class={styles.item}>
+                    <li className={styles.item}>
                         <Link to="/triagem">Triagem</Link>
                     </li>
                 </ul>
