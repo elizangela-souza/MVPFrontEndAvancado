@@ -1,0 +1,41 @@
+.home_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4em;
+}
+
+.home_container h1 {
+    font-size: 2.5em;
+    margin-bottom: .5em;
+}
+
+.home_container span {
+    color: #046bda;
+    padding: 0 .2em;
+}
+
+.home_container p {
+    margin-bottom: 1.5em;
+    color: #383838;
+}
+.home_container h2 {
+     margin-bottom: .5em;
+}
+
+.home_container ul {
+    margin-bottom: 1.5em;
+}
+
+.home_container ul li {
+     margin-bottom: .5em;
+    color: #383838;
+}
+
+.home_container img {
+    max-width: 100%;
+    height: auto;
+    margin: 2em 0;
+}
