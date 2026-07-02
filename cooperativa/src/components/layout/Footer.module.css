@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     list-style-type: none;
+    flex-wrap: wrap;
 }
 
 .social_list li {
@@ -30,4 +31,51 @@
 
 .copy_right span {
     font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .footer {
+        padding: 2.5em;
+    }
+
+    .social_list {
+        flex-wrap: wrap; 
+    }
+
+    .social_list li {
+        margin: 0.8em;
+    }
+
+    .social_list svg {
+        font-size: 1.4em; 
+    }
+
+    .copy-right {
+        font-size: 0.95em;
+        margin-top: 1.5em;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 2em;
+    }
+
+    .social_list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .social_list li {
+        margin: 0.5em;
+    }
+
+    .social_list svg {
+        font-size: 1.3em;
+    }
+
+    .copy-right {
+        font-size: 0.9em;
+    }
 }
