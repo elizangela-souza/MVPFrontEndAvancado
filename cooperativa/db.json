@@ -1,0 +1,29 @@
+{
+    "projects": [],
+    "categories": [
+        {
+          "id": 1,
+          "name": "Papel/Papelão"
+        },
+        {
+          "id": 2,
+          "name": "Plástico"
+        },
+        {
+          "id": 3,
+          "name": "Vidro"
+        },
+        {
+          "id": 4,
+          "name": "Metal"
+        },
+        {
+          "id": 5,
+          "name": "Embalagem multicamada"
+        },
+        {
+          "id": 6,
+          "name": "Embalagem longavida"
+        }
+    ]
+}

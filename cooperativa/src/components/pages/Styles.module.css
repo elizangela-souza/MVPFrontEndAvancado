@@ -1,13 +1,18 @@
-.cooperado_container {
+.page_container {
     width: 450px;  
     margin: 0 auto;
     padding: 3em;    
 }
 
-.cooperado_container h1 {
+.page_container h1 {
     margin-bottom: 0.5em;
 }
 
-.cooperado_container p {
+.page_container p {
     color: #7b7b7b;
+}
+
+form {
+    width: 100%;
+    margin: 2em 0;
 }

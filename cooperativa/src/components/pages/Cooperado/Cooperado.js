@@ -1,12 +1,12 @@
-import Form from '../../Form/Form.js'
-import styles from './Cooperado.module.css'; 
+import FormCooperado from './FormCooperado.js'
+import styles from './../Styles.module.css'; 
 
 function Cooperado() {
     return (
-        <div className={styles.cooperado_container}>
-            <h1>Cadastrar Cooperado/a:</h1>
+        <div className={styles.page_container}>
+            <h1>Cooperado/a</h1>
             <p>Cadastre um cooperado/a para depois registrar suas triagens.</p>
-            <Form btnText="Cadastrar Cooperado/a"/>
+            <FormCooperado btnText="Cadastrar Cooperado/a"/>
         </div>
     )
 }

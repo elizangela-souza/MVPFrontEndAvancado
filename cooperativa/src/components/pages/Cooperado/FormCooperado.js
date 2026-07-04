@@ -1,10 +1,10 @@
-import Input from './Input.js'
-import SubmitButton from './SubmitButton.js';
+import Input from '../../Form/Input.js'
+import SubmitButton from '../../Form/SubmitButton.js';
 
-import styles from './Form.module.css';
+import styles from './../Styles.module.css';
 
 
-function Form({btnText}) {
+function FormCooperado({btnText}) {
     return (
         <form className={styles.form}>
             <Input 
@@ -28,7 +28,9 @@ function Form({btnText}) {
             <Input 
             type="date" 
             text="Data de nascimento" 
-            name="data_nasc" 
+            name="data_nasc"
+            min="1900-01-01" 
+            max="3000-12-31"
             />
             <Input 
             type="text" 
@@ -41,4 +43,4 @@ function Form({btnText}) {
     )
 }
 
-export default Form
+export default FormCooperado
