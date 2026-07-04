@@ -1,29 +1,97 @@
 {
-    "projects": [],
-    "categories": [
-        {
-          "id": 1,
-          "name": "Papel/Papelão"
-        },
-        {
-          "id": 2,
-          "name": "Plástico"
-        },
-        {
-          "id": 3,
-          "name": "Vidro"
-        },
-        {
-          "id": 4,
-          "name": "Metal"
-        },
-        {
-          "id": 5,
-          "name": "Embalagem multicamada"
-        },
-        {
-          "id": 6,
-          "name": "Embalagem longavida"
-        }
-    ]
+  "records": [
+    {
+      "category": {
+        "id": "1",
+        "name": "Papel/Papelão"
+      },
+      "quantidade": "0",
+      "valor": "0",
+      "cost": 0,
+      "services": [],
+      "id": "1LoMPFxGfCM"
+    },
+    {
+      "category": {
+        "id": "2",
+        "name": "Plástico"
+      },
+      "quantidade": "0",
+      "valor": "0",
+      "cost": 0,
+      "services": [],
+      "id": "4gC6quDYPMo"
+    },
+    {
+      "category": {
+        "id": "2",
+        "name": "Plástico"
+      },
+      "quantidade": "0",
+      "valor": "0",
+      "cost": 0,
+      "services": [],
+      "id": "fBZRfqSfXJA"
+    },
+    {
+      "category": {
+        "id": "3",
+        "name": "Vidro"
+      },
+      "quantidade": "0",
+      "valor": "0",
+      "cost": 0,
+      "services": [],
+      "id": "L7vm5XaNR_0"
+    },
+    {
+      "category": {
+        "id": "4",
+        "name": "Metal"
+      },
+      "quantidade": "0",
+      "valor": "0",
+      "cost": 0,
+      "services": [],
+      "id": "OlP1eIoWVZ8"
+    },
+    {
+      "category": {
+        "id": "5",
+        "name": "Embalagem multicamada"
+      },
+      "quantidade": "0",
+      "valor": "0",
+      "cost": 0,
+      "services": [],
+      "id": "rmVQVOtNkjw"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Papel/Papelão"
+    },
+    {
+      "id": "2",
+      "name": "Plástico"
+    },
+    {
+      "id": "3",
+      "name": "Vidro"
+    },
+    {
+      "id": "4",
+      "name": "Metal"
+    },
+    {
+      "id": "5",
+      "name": "Embalagem multicamada"
+    },
+    {
+      "id": "6",
+      "name": "Embalagem longavida"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

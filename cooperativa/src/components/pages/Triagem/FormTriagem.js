@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import Input from '../../Form/Input.js';
 import Select from '../../Form/Select.js';
 import SubmitButton from '../../Form/SubmitButton.js';
@@ -6,6 +8,23 @@ import styles from './../Styles.module.css';
 
 
 function FormTriagem({btnText}) {
+
+    const [categories, setCategories] = useState([])
+    
+        useEffect(() => {
+            fetch("http://localhost:5000/categories", {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then((resp) => resp.json())
+                .then((data) => {
+                    setCategories(data)
+                })
+                .catch(err => console.log(err))
+        }, [])
+
     return (
         <form className={styles.form}>
             <Input 
@@ -17,6 +36,7 @@ function FormTriagem({btnText}) {
             <Select 
             text="Selecione a categoria do material"
             name="categoria"
+            options={categories}
             />
             <Input 
             type="date" 

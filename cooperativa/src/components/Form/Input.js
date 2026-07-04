@@ -12,7 +12,8 @@ function Input({ type, text, name, placeholder, min, max, step, handleOnChange, 
             max={max}
             step={step}
             onChange={handleOnChange}
-            value={value} />
+            value={value} 
+            />
         </div>
     )
 }
