@@ -1,6 +1,7 @@
+import LinkButton from '../../layout/LinkButton.js';
+
 import styles from './Home.module.css';
 import cooperados from '../../../img/cooperados.jpg'
-import LinkButton from '../../layout/LinkButton.js';
 
 function Home() {
     return (
