@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import Message from '../../layout/Message.js';
@@ -16,6 +16,8 @@ function TableCooperado() {
 
   const location = useLocation();
   const message = location.state?.message;
+
+  const navigate = useNavigate()
 
   const columns = [
     { header: "Matrícula", acessor: "matricula" },
@@ -47,8 +49,7 @@ function TableCooperado() {
   }, [])
 
   const handleEdit = (row) => {
-    console.log("Editar registro:", row);
-    // aqui você pode abrir um modal ou navegar para uma página de edição
+    navigate(`/cooperado/editar/${row.id}`)
   };
 
   const handleDelete = (row) => {
