@@ -48,7 +48,7 @@ function TableTriagem() {
           console.log(err)
           setLoading(false);
         })
-    }, 300)
+    }, 1000) 
   }, [])
 
   const handleEdit = (row) => {
