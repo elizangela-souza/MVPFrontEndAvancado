@@ -13,7 +13,7 @@
 .table td {
   border: 2px solid #549deb;
   padding: 0.75em;
-  text-align: left;
+  text-align: center;
 }
 
 .table th {
@@ -23,6 +23,22 @@
 
 .table tr:nth-child(even) {
   background-color: #fafafa;
+}
+
+.edit_btn, .delete_btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0 0.3em;
+  font-size: 1.2rem;
+}
+
+.edit_btn {
+  color: #046bda;
+}
+
+.delete_btn {
+  color: #da0404; 
 }
 
 /* Responsividade */

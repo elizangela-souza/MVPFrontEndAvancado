@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react';
 import Message from '../../layout/Message.js';
 import Container from '../../layout/Container.js';
 import LinkButton from '../../layout/LinkButton.js';
+import Loading from '../../layout/Loading.js';
 import Table from '../../layout/Table.js';
 
 import styles from './../Styles.module.css';
 
 function TableCooperado() {
   const [registros, setRegistros] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const location = useLocation();
   const message = location.state?.message;
@@ -23,33 +25,42 @@ function TableCooperado() {
   ]
 
   useEffect(() => {
-    fetch('http://localhost:5000/cooperados', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'aplication/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setRegistros(data);
+     setTimeout(() => {
+      fetch('http://localhost:5000/cooperados', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'aplication/json',
+        },
       })
-      .catch((err) => console.log(err))
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setRegistros(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err)
+          setLoading(false);
+        })
+    }, 1000)
   }, [])
 
   return (
-    <div className={styles.registro_container}>
-      <div className={styles.title_container}>
-        <h1> Lista de Cooperados/as</h1>
-        <LinkButton to="/Cooperado" text="Novo registro" />
-      </div>
-      {message && <Message type="sucess" msg={message} />}
-      <Container customClass="start">
-        {registros.length > 0 &&  
+    <Container customClass="min-height">
+      <div className={styles.registro_container}>
+        <div className={styles.title_container}>
+          <h1> Lista de Cooperados/as</h1>
+          <LinkButton to="/Cooperado" text="Novo registro" />
+        </div>
+        {message && <Message type="sucess" msg={message} />}
+        <Container customClass="start">
+           {loading && <Loading />}
+          {!loading && registros.length > 0 &&
             <Table columns={columns} data={registros} />
-        }
-      </Container>
-    </div>
+          }
+        </Container>
+      </div>
+    </Container>
   )
 }
 

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import LinkButton from '../../layout/LinkButton.js';
+import Container from '../../layout/Container.js';
 
 import FormCooperado from './FormCooperado.js'
 import styles from './../Styles.module.css';
@@ -26,12 +27,14 @@ function Cooperado() {
     }
 
     return (
-        <div className={styles.page_container}>
-            <h1>Cooperado/a</h1>
-            <p>Cadastre um cooperado/a para depois registrar suas triagens.</p>
-            <FormCooperado handleSubmit={createPost} btnText="Cadastrar Cooperado/a" />
-            <LinkButton to="/registrosCooperado" text="Consultar Cooperados/as" />
-        </div>
+        <Container customClass="min-height">
+            <div className={styles.page_container}>
+                <h1>Cooperado/a</h1>
+                <p>Cadastre um cooperado/a para depois registrar suas triagens.</p>
+                <FormCooperado handleSubmit={createPost} btnText="Cadastrar Cooperado/a" />
+                <LinkButton to="/registrosCooperado" text="Consultar Cooperados/as" />
+            </div>
+        </Container>
     )
 }
 

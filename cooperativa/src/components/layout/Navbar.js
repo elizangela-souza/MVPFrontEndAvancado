@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom';
 
-import Container from './Container';
-
 import styles from './Navbar.module.css';
 import logo from '../../img/logo.png';
 
 function Navbar() {
     return (
         <nav className={styles.navbar}>
-            <Container customClass="min-height">
+            <div>
                 <Link to="/">
                     <img src={logo} alt="Banner com a logo da coopperativa de reciclagem" />
                 </Link>
@@ -20,13 +18,10 @@ function Navbar() {
                         <Link to="/cooperado">Cooperado</Link>
                     </li>
                     <li className={styles.item}>
-                        <Link to="/estoque">Estoque</Link>
-                    </li>
-                    <li className={styles.item}>
                         <Link to="/triagem">Triagem</Link>
                     </li>
                 </ul>
-            </Container>
+            </div>
         </nav>
     )
 }

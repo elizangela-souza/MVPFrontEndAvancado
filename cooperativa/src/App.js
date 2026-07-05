@@ -8,17 +8,16 @@ import Triagem from './components/pages/Triagem/Triagem.js';
 import TableEstoque from './components/pages/Estoque/TableEstoque.js';
 import TableCooperado from './components/pages/Cooperado/TableCooperado.js';
 import TableTriagem from './components/pages/Triagem/TableTriagem.js';
+import NotFound from './components/pages/NotFound/NotFound.js';
 
-import Container from './components/layout/Container.js';
-import Navbar from './components/layout/Navbar.js';
-import Footer from './components/layout/Footer.js';
+import MainLayout from './components/layout/MainLayout.js';
+import EmptyLayout from './components/layout/EmptyLayout.js';
 
 function App() {
   return (
     <Router>
-      <Navbar/>
-        <Routes>
-          <Route path='/' element={<Container customClass="min-height"/>}>
+      <Routes>
+        <Route element={<MainLayout />}>    
             <Route index element={<Home />} />
             <Route path="/cooperado" element={<Cooperado />} />
             <Route path="/estoque" element={<Estoque />} />
@@ -26,9 +25,12 @@ function App() {
             <Route path="/registrosEstoque" element={<TableEstoque />} />
             <Route path="/registrosCooperado" element={<TableCooperado />} />
             <Route path="/registrosTriagem" element={<TableTriagem />} />
-          </Route>
-        </Routes>
-        <Footer/>
+        </Route>
+
+        <Route element={<EmptyLayout />}>
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
     </Router>
   );
 }

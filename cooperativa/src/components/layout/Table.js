@@ -1,8 +1,8 @@
-// import { BsPencil, BsFillTrashFill } from 'react-icons/bs';
+import { BsPencil, BsFillTrashFill } from 'react-icons/bs';
 
 import styles from './Table.module.css';
 
-function Table({ columns, data }) {
+function Table({ columns, data, onEdit, onDelete }) {
     return (
         <div className={styles.table_container}>
             <table className={styles.table}>
@@ -11,6 +11,7 @@ function Table({ columns, data }) {
                         {columns.map((col) => (
                             <th key={col.acessor}>{col.header}</th>
                         ))}
+                        <th>Ações</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -21,6 +22,20 @@ function Table({ columns, data }) {
                                     {col.render ? col.render(row) : row[col.acessor]}
                                 </td>
                             ))}
+                            <td>
+                                <button
+                                    className={styles.edit_btn}
+                                    onClick={() => onEdit(row)}
+                                >
+                                    <BsPencil />
+                                </button>
+                                <button
+                                    className={styles.delete_btn}
+                                    onClick={() => onDelete(row)}
+                                >
+                                    <BsFillTrashFill />
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
