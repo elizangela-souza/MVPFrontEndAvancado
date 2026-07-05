@@ -9,8 +9,9 @@ import styles from './../Styles.module.css';
 
 function FormTriagem({ handleSubmit, btnText, recordData }) {
 
-    const [categorias, setCategorias] = useState([])
-    const [registro, setRegistro] = useState(recordData || {})
+    const [categorias, setCategorias] = useState([]);
+    const [registro, setRegistro] = useState(recordData || {});
+    const [errorMsg, setErrorMsg] = useState("");
 
     useEffect(() => {
         if (recordData) {
@@ -33,10 +34,16 @@ function FormTriagem({ handleSubmit, btnText, recordData }) {
     }, [])
 
     const submit = (e) => {
-        e.preventDefault()
-        console.log(registro)
-        handleSubmit(registro)
+    e.preventDefault();
+
+    if (!registro.matricula || !registro.categoria || !registro.data_triagem || !registro.kg_material) {
+      setErrorMsg("Por favor, preencha todos os campos antes de enviar.");
+      return;
     }
+
+    setErrorMsg("");
+    handleSubmit(registro);
+  };
 
     function handleChange(e) {
         setRegistro({ ...registro, [e.target.name]: e.target.value })
@@ -52,6 +59,8 @@ function FormTriagem({ handleSubmit, btnText, recordData }) {
             },
         })
     }
+    
+    const isFormValid = registro.matricula && registro.categoria && registro.data_triagem && registro.kg_material;
 
     return (
         <form onSubmit={submit} className={styles.form}>
@@ -61,7 +70,7 @@ function FormTriagem({ handleSubmit, btnText, recordData }) {
                 name="matricula"
                 handleOnChange={handleChange}
                 placeholder="Digite a matrícula CXXXXX"
-                value={ registro.matricula || ''}
+                value={registro.matricula || ''}
             />
             <Select
                 text="Selecione a categoria do material"
@@ -77,7 +86,7 @@ function FormTriagem({ handleSubmit, btnText, recordData }) {
                 handleOnChange={handleChange}
                 min="1900-01-01"
                 max="3000-12-31"
-                value={ registro.data_triagem || ''}
+                value={registro.data_triagem || ''}
             />
             <Input
                 type="number"
@@ -86,9 +95,10 @@ function FormTriagem({ handleSubmit, btnText, recordData }) {
                 handleOnChange={handleChange}
                 min="0"
                 step="0.1"
-                value={ registro.kg_material || ''}
+                value={registro.kg_material || ''}
             />
-            <SubmitButton text={btnText} />
+            {errorMsg && <Message type="error" msg={errorMsg} />}
+            <SubmitButton text={btnText} disabled={!isFormValid}/>
         </form>
     )
 }

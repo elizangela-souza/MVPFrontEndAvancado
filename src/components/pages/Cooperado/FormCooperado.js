@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import Message from '../../layout/Message.js';
+
 import Input from '../../Form/Input.js'
 import SubmitButton from '../../Form/SubmitButton.js';
 
@@ -8,6 +10,7 @@ import styles from './../Styles.module.css';
 
 function FormCooperado({ handleSubmit, btnText, recordData }) {
     const [registro, setRegistro] = useState(recordData || {})
+    const [errorMsg, setErrorMsg] = useState("");
 
     useEffect(() => {
         if (recordData) {
@@ -17,15 +20,21 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
 
 
     const submit = (e) => {
-        e.preventDefault()
-        console.log(registro)
-        handleSubmit(registro)
+    e.preventDefault();
+    if (!registro.nome || !registro.matricula || !registro.cpf || !registro.data_nasc || !registro.celular) {
+      setErrorMsg("Por favor, preencha todos os campos antes de enviar.");
+      return;
     }
+    setErrorMsg(""); 
+    handleSubmit(registro);
+  };
 
     function handleChange(e) {
         setRegistro({ ...registro, [e.target.name]: e.target.value })
         console.log(registro)
     }
+
+    const isFormValid = registro.nome && registro.matricula && registro.cpf && registro.data_nasc && registro.celular;
 
     return (
         <form onSubmit={submit} className={styles.form}>
@@ -70,7 +79,8 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
                 placeholder="(99)99999-9999"
                 value={registro.celular || ''}
             />
-            <SubmitButton text={btnText} />
+            {errorMsg && <Message type="error" msg={errorMsg} />}
+            <SubmitButton text={btnText} disabled={!isFormValid}/>
         </form>
     )
 }
