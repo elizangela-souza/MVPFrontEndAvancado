@@ -9,7 +9,7 @@ import styles from './../Styles.module.css';
 
 function Triagem() {
     const navigate = useNavigate()
-    const id = useParams()
+    const { id } = useParams()
     const [registro, setRegistro] = useState(null);
 
     function createPost(registro) {
@@ -49,12 +49,15 @@ function Triagem() {
             })
             .catch(err => console.log(err));
     }
+
     return (
         <Container customClass="min-height">
             <div className={styles.page_container}>
                 <h1>Triagem</h1>
                 <p>Cadastre o registro da triagem realizada.</p>
-                <FormTriagem handleSubmit={id ? updatePost : createPost} btnText={id ? "Salvar alterações" : "Cadastrar triagem" }
+                <FormTriagem 
+                handleSubmit={id ? updatePost : createPost} 
+                btnText={id ? "Salvar alterações" : "Cadastrar triagem" }
                 recordData={registro}
                 />
                 <LinkButton to="/registrosTriagem" text="Consultar Triagens" />

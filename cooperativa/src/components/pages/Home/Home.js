@@ -18,7 +18,7 @@ function Home() {
                 <li>Menu <span>Cooperados/as</span>: Incluir, consultar, editar e excluir registro do/a cooperado/a</li>
                 <li>Menu <span>Triagem</span>: Incluir e consultar os registros de triagem</li>
             </ul>
-            <LinkButton to="/rotaInexistente" text="Entre em contato"/>
+            <LinkButton to="/rotaInexistente" text="Entre em contato com o suporte"/>
             <img src={cooperados} alt="Desenho de pessoas separando o lixo para reciclagem"/>
             <h3>"Quando a pessoa encesta o lixo, e na lixeira certa, é ponto para a cidadania e vitória para todos".</h3>
         </section>

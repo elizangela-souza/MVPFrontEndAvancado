@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Input from '../../Form/Input.js'
 import SubmitButton from '../../Form/SubmitButton.js';
@@ -8,6 +8,13 @@ import styles from './../Styles.module.css';
 
 function FormCooperado({ handleSubmit, btnText, recordData }) {
     const [registro, setRegistro] = useState(recordData || {})
+
+    useEffect(() => {
+        if (recordData) {
+            setRegistro(recordData);
+        }
+    }, [recordData]);
+
 
     const submit = (e) => {
         e.preventDefault()
@@ -28,7 +35,7 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
                 name="nome"
                 handleOnChange={handleChange}
                 placeholder="Digite o nome completo"
-                value={registro.nome ? registro.nome : ''}
+                value={registro.nome || ''}
             />
             <Input
                 type="text"
@@ -36,7 +43,7 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
                 name="matricula"
                 handleOnChange={handleChange}
                 placeholder="Digite a matrícula CXXXXX"
-                value={registro.matricula ? registro.matricula : ''}
+                value={registro.matricula || ''}
             />
             <Input
                 type="text"
@@ -44,7 +51,7 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
                 name="cpf"
                 handleOnChange={handleChange}
                 placeholder="Digite somente números"
-                value={registro.cpf ? registro.cpf : ''}
+                value={registro.cpf || ''}
             />
             <Input
                 type="date"
@@ -53,7 +60,7 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
                 handleOnChange={handleChange}
                 min="1900-01-01"
                 max="3000-12-31"
-                value={registro.data_nasc ? registro.data_nasc : ''}
+                value={registro.data_nasc || ''}
             />
             <Input
                 type="text"
@@ -61,7 +68,7 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
                 name="celular"
                 handleOnChange={handleChange}
                 placeholder="(99)99999-9999"
-                value={registro.celular ? registro.celular : ''}
+                value={registro.celular || ''}
             />
             <SubmitButton text={btnText} />
         </form>

@@ -1,74 +1,4 @@
 {
-  "registros": [
-    {
-      "categoria": {
-        "id": "1",
-        "name": "Papel/Papelão"
-      },
-      "quantidade": "0",
-      "valor": "0",
-      "id": "1LoMPFxGfCM"
-    },
-    {
-      "categoria": {
-        "id": "2",
-        "name": "Plástico"
-      },
-      "quantidade": "0",
-      "valor": "0",
-      "id": "4gC6quDYPMo"
-    },
-    {
-      "categoria": {
-        "id": "3",
-        "name": "Vidro"
-      },
-      "quantidade": "0",
-      "valor": "0",
-      "id": "L7vm5XaNR_0"
-    },
-    {
-      "categoria": {
-        "id": "4",
-        "name": "Metal"
-      },
-      "quantidade": "0",
-      "valor": "0",
-      "id": "OlP1eIoWVZ8"
-    },
-    {
-      "categoria": {
-        "id": "5",
-        "name": "Embalagem multicamada"
-      },
-      "quantidade": "0",
-      "valor": "0",
-      "id": "rmVQVOtNkjw"
-    },
-    {
-      "matricula": "C09876",
-      "categoria": {
-        "id": "3",
-        "name": "Vidro"
-      },
-      "data_triagem": "2026-07-05",
-      "kg_material": "15",
-      "id": "sS6xmxBkLCY"
-    },
-    {
-      "id": "E2lg8y-8udk"
-    },
-    {
-      "matricula": "C09876",
-      "categoria": {
-        "id": "3",
-        "name": "Vidro"
-      },
-      "data_triagem": "2026-07-05",
-      "kg_material": "15",
-      "id": "BbFKhFqdFD0"
-    }
-  ],
   "categorias": [
     {
       "id": "1",
@@ -103,6 +33,14 @@
       "data_nasc": "1988-06-30",
       "celular": "61987065526",
       "id": "3O2v6By1WZE"
+    },
+    {
+      "nome": "Danilo Dias",
+      "matricula": "C12345",
+      "cpf": "06798556011",
+      "data_nasc": "1999-07-29",
+      "celular": "61986761033",
+      "id": "sG9mRsjmmK0"
     }
   ],
   "triagens": [],

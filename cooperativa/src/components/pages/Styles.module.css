@@ -27,3 +27,11 @@ form {
     justify-content: space-between;
     margin-bottom: 2em;  
 }
+
+.no_records {
+  text-align: center;                
+  font-size: 1.2rem;        
+  color: #d9534f;           
+  padding: 1em;                   
+  font-weight: bold;        
+}

@@ -6,12 +6,15 @@ import Container from '../../layout/Container.js';
 import LinkButton from '../../layout/LinkButton.js';
 import Loading from '../../layout/Loading.js';
 import Table from '../../layout/Table.js';
+import Modal from "../../Form/Modal.js";
 
 import styles from './../Styles.module.css';
 
-function TableTriagem({ handleRemove }) {
+function TableTriagem() {
   const [registros, setRegistros] = useState([]);
+  const [registroSelecionado, setRegistroSelecionado] = useState(null);
   const [loading, setLoading] = useState(true);
+   const [showModal, setShowModal] = useState(false);
   const [registroMsg, setRegistroMsg] = useState('');
 
   const location = useLocation();
@@ -52,18 +55,22 @@ function TableTriagem({ handleRemove }) {
     navigate(`/triagem/editar/${row.id}`)
   };
 
-  const handleDelete = (row) => {
-    if (window.confirm(`Deseja excluir o registro ${row.id}?`)) {
-      fetch(`http://localhost:5000/triagens/${row.id}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
+  const handleDeleteClick = (row) => {
+    setRegistroSelecionado(row);
+    setShowModal(true);
+  };
+
+  const confirmDelete = (row) => {
+    fetch(`http://localhost:5000/triagens/${row.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(() => {
+        setRegistros(registros.filter((r) => r.id !== registroSelecionado.id));
+        setRegistroMsg('Registro removido com sucesso!');
+        setShowModal(false);
       })
-        .then(() => {
-          setRegistros(registros.filter((r) => r.id !== row.id));
-          setRegistroMsg('Registro removido com sucesso!');
-        })
-        .catch((err) => console.log(err));
-    }
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -82,11 +89,19 @@ function TableTriagem({ handleRemove }) {
               columns={columns}
               data={registros}
               onEdit={handleEdit}
-              onDelete={handleDelete}
+              onDelete={handleDeleteClick}
             />
           }
+          {showModal && (
+            <Modal
+              title="Confirmar exclusão"
+              message={`Deseja excluir o registro ${registroSelecionado?.id}?`}
+              onConfirm={confirmDelete}
+              onCancel={() => setShowModal(false)}
+            />
+          )}
           {!loading && registros.length === 0 && (
-            <p>Não há registros de triagens!</p>
+            <p className={styles.no_records}>Não há registros de triagens!</p>
           )}
         </Container>
       </div>
