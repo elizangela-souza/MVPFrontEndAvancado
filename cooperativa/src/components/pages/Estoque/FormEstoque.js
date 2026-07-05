@@ -8,11 +8,11 @@ import styles from './../Styles.module.css';
 
 function FormEstoque({ handleSubmit, btnText, recordData }) {
 
-    const [categories, setCategories] = useState([])
-    const [record, setRecord] = useState(recordData || {})
+    const [categorias, setCategorias] = useState([])
+    const [registro, setRegistro] = useState(recordData || {})
 
     useEffect(() => {
-        fetch("http://localhost:5000/categories", {
+        fetch("http://localhost:5000/categorias", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'
@@ -20,25 +20,25 @@ function FormEstoque({ handleSubmit, btnText, recordData }) {
         })
             .then((resp) => resp.json())
             .then((data) => {
-                setCategories(data)
+                setCategorias(data)
             })
             .catch(err => console.log(err))
     }, [])
 
     const submit = (e) => {
         e.preventDefault()
-        console.log(record)
-        handleSubmit(record)
+        console.log(registro)
+        handleSubmit(registro)
     }
 
     function handleChange(e) {
-        setRecord({ ...record, [e.target.name]: e.target.value })
-        console.log(record)
+        setRegistro({ ...registro, [e.target.name]: e.target.value })
+        console.log(registro)
     }
 
     function handleCategory(e) {
-        setRecord({ ...record, 
-            category: {
+        setRegistro({ ...registro, 
+            categoria: {
             id: e.target.value,
             name: e.target.options[e.target.selectedIndex].text
             },
@@ -50,9 +50,9 @@ return (
         <Select
             text="Selecione a categoria do material"
             name="categoria"
-            options={categories}
+            options={categorias}
             handleOnChange={handleCategory}
-            value={record.category ? record.category.id : ''}
+            value={registro.categoria ? registro.categoria.id : ''}
         />
         <Input
             type="number"
@@ -61,7 +61,7 @@ return (
             min="0"
             step="0.1"
             handleOnChange={handleChange}
-            value={record.quantidade ? record.quantidade : ''}
+            value={registro.quantidade ? registro.quantidade : ''}
         />
         <Input
             type="number"
@@ -69,7 +69,7 @@ return (
             name="valor"
             min="0"
             handleOnChange={handleChange}
-            value={record.valor ? record.valor : ''}
+            value={registro.valor ? registro.valor : ''}
         />
         <SubmitButton text={btnText} />
     </form>

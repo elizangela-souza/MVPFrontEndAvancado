@@ -1,73 +1,52 @@
 {
-  "records": [
+  "registros": [
     {
-      "category": {
+      "categoria": {
         "id": "1",
         "name": "Papel/Papelão"
       },
       "quantidade": "0",
       "valor": "0",
-      "cost": 0,
-      "services": [],
       "id": "1LoMPFxGfCM"
     },
     {
-      "category": {
+      "categoria": {
         "id": "2",
         "name": "Plástico"
       },
       "quantidade": "0",
       "valor": "0",
-      "cost": 0,
-      "services": [],
       "id": "4gC6quDYPMo"
     },
     {
-      "category": {
-        "id": "2",
-        "name": "Plástico"
-      },
-      "quantidade": "0",
-      "valor": "0",
-      "cost": 0,
-      "services": [],
-      "id": "fBZRfqSfXJA"
-    },
-    {
-      "category": {
+      "categoria": {
         "id": "3",
         "name": "Vidro"
       },
       "quantidade": "0",
       "valor": "0",
-      "cost": 0,
-      "services": [],
       "id": "L7vm5XaNR_0"
     },
     {
-      "category": {
+      "categoria": {
         "id": "4",
         "name": "Metal"
       },
       "quantidade": "0",
       "valor": "0",
-      "cost": 0,
-      "services": [],
       "id": "OlP1eIoWVZ8"
     },
     {
-      "category": {
+      "categoria": {
         "id": "5",
         "name": "Embalagem multicamada"
       },
       "quantidade": "0",
       "valor": "0",
-      "cost": 0,
-      "services": [],
       "id": "rmVQVOtNkjw"
     }
   ],
-  "categories": [
+  "categorias": [
     {
       "id": "1",
       "name": "Papel/Papelão"
@@ -91,6 +70,28 @@
     {
       "id": "6",
       "name": "Embalagem longavida"
+    }
+  ],
+  "cooperados": [
+    {
+      "nome": "Luana Reis Viana",
+      "matricula": "C09876",
+      "cpf": "06798556011",
+      "data_nasc": "1987-07-04",
+      "celular": "61987065526",
+      "id": "eK-SAmapTio"
+    }
+  ],
+  "triagens": [
+    {
+      "matricula": "C09876",
+      "categoria": {
+        "id": "1",
+        "name": "Papel/Papelão"
+      },
+      "data_triagem": "2026-07-04",
+      "kg_material": "20",
+      "id": "ps1FhHHXSl0"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

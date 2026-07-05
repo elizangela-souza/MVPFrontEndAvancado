@@ -10,22 +10,19 @@ function Estoque() {
 
     const navigate = useNavigate()
 
-    function createPost(record) {
-        //inicializar o custo e os services
-        record.cost = 0
-        record.services = []
+    function createPost(registro) {
 
-        fetch('http://localhost:5000/records', {
+        fetch('http://localhost:5000/registros', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(record),
+            body: JSON.stringify(registro),
         })
             .then((resp) => resp.json())
             .then((data) => {
                console.log(data)
-               navigate('/registros', { state: {message: 'Registro cadastrado com sucesso!'}})
+               navigate('/registrosEstoque', { state: {message: 'Registro cadastrado com sucesso!'}})
             })
             .catch(err => console.log(err))
     }

@@ -16,3 +16,14 @@ form {
     width: 100%;
     margin: 2em 0;
 }
+
+.registro_container {
+    padding: 2em;
+    width: 100%;
+}
+
+.title_container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;  
+}
