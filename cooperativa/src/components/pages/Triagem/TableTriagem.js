@@ -12,6 +12,7 @@ import styles from './../Styles.module.css';
 function TableTriagem({ handleRemove }) {
   const [registros, setRegistros] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [registroMsg, setRegistroMsg] = useState('');
 
   const location = useLocation();
   const message = location.state?.message;
@@ -25,7 +26,7 @@ function TableTriagem({ handleRemove }) {
   ]
 
   useEffect(() => {
-     setTimeout(() => {
+    setTimeout(() => {
       fetch('http://localhost:5000/triagens', {
         method: 'GET',
         headers: {
@@ -42,7 +43,7 @@ function TableTriagem({ handleRemove }) {
           console.log(err)
           setLoading(false);
         })
-    }, 1000)
+    }, 300)
   }, [])
 
   const handleEdit = (row) => {
@@ -58,6 +59,7 @@ function TableTriagem({ handleRemove }) {
       })
         .then(() => {
           setRegistros(registros.filter((r) => r.id !== row.id));
+          setRegistroMsg('Registro removido com sucesso!');
         })
         .catch((err) => console.log(err));
     }
@@ -71,16 +73,20 @@ function TableTriagem({ handleRemove }) {
           <LinkButton to="/Triagem" text="Novo registro" />
         </div>
         {message && <Message type="sucess" msg={message} />}
+        {registroMsg && <Message type="sucess" msg={registroMsg} />}
         <Container customClass="start">
           {loading && <Loading />}
           {!loading && registros.length > 0 &&
-            <Table 
-            columns={columns} 
-            data={registros}
-            onEdit={handleEdit}
-            onDelete={handleDelete} 
+            <Table
+              columns={columns}
+              data={registros}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
             />
           }
+          {!loading && registros.length === 0 && (
+            <p>Não há registros de triagens!</p>
+          )}
         </Container>
       </div>
     </Container>

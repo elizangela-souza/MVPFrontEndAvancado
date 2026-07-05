@@ -12,6 +12,7 @@ import styles from './../Styles.module.css';
 function TableCooperado() {
   const [registros, setRegistros] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [registroMsg, setRegistroMsg] = useState('');
 
   const location = useLocation();
   const message = location.state?.message;
@@ -25,7 +26,7 @@ function TableCooperado() {
   ]
 
   useEffect(() => {
-     setTimeout(() => {
+    setTimeout(() => {
       fetch('http://localhost:5000/cooperados', {
         method: 'GET',
         headers: {
@@ -42,8 +43,27 @@ function TableCooperado() {
           console.log(err)
           setLoading(false);
         })
-    }, 1000)
+    }, 300)
   }, [])
+
+  const handleEdit = (row) => {
+    console.log("Editar registro:", row);
+    // aqui você pode abrir um modal ou navegar para uma página de edição
+  };
+
+  const handleDelete = (row) => {
+    if (window.confirm(`Deseja excluir o registro ${row.id}?`)) {
+      fetch(`http://localhost:5000/cooperados/${row.id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then(() => {
+          setRegistros(registros.filter((r) => r.id !== row.id));
+          setRegistroMsg('Registro removido com sucesso!');
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   return (
     <Container customClass="min-height">
@@ -53,11 +73,20 @@ function TableCooperado() {
           <LinkButton to="/Cooperado" text="Novo registro" />
         </div>
         {message && <Message type="sucess" msg={message} />}
+        {registroMsg && <Message type="sucess" msg={registroMsg} />}
         <Container customClass="start">
-           {loading && <Loading />}
+          {loading && <Loading />}
           {!loading && registros.length > 0 &&
-            <Table columns={columns} data={registros} />
+            <Table
+              columns={columns}
+              data={registros}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
           }
+          {!loading && registros.length === 0 && (
+            <p>Não há registros de cooperados!</p>
+          )}
         </Container>
       </div>
     </Container>

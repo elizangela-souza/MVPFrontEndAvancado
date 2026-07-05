@@ -10,7 +10,7 @@ function Triagem() {
     const navigate = useNavigate()
 
     function createPost(registro) {
-        fetch('http://localhost:5000/registros', {
+        fetch('http://localhost:5000/triagens', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -20,7 +20,7 @@ function Triagem() {
             .then((resp) => resp.json())
             .then((data) => {
                 console.log(data)
-                navigate('/registrosEstoque', { state: { message: 'Registro cadastrado com sucesso!' } })
+                navigate('/registrosTriagem', { state: { message: 'Registro cadastrado com sucesso!' } })
             })
             .catch(err => console.log(err))
     }
