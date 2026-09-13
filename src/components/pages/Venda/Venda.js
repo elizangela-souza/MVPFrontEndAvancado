@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import LinkButton from '../../layout/LinkButton.js';
 import Container from '../../layout/Container.js';
 
-import FormTriagem from './FormTriagem.js'
+import FormVenda from './FormVenda.js'
 import styles from './../Styles.module.css';
 
-function Triagem() {
+function Venda() {
     const navigate = useNavigate()
     const { id } = useParams()
     const [registro, setRegistro] = useState(null);
@@ -23,7 +23,7 @@ function Triagem() {
             .then((resp) => resp.json())
             .then((data) => {
                 console.log(data)
-                navigate('/registrosTriagem', { state: { message: 'Registro cadastrado com sucesso!' } })
+                navigate('/registrosVenda', { state: { message: 'Registro cadastrado com sucesso!' } })
             })
             .catch(err => console.log(err))
     }
@@ -45,7 +45,7 @@ function Triagem() {
         })
             .then((resp) => resp.json())
             .then((data) => {
-                navigate('/registrosTriagem', { state: { message: 'Registro atualizado com sucesso!' } });
+                navigate('/registrosVenda', { state: { message: 'Registro atualizado com sucesso!' } });
             })
             .catch(err => console.log(err));
     }
@@ -53,17 +53,17 @@ function Triagem() {
     return (
         <Container customClass="min-height">
             <div className={styles.page_container}>
-                <h1>Triagem</h1>
-                <p>Cadastre o registro da triagem realizada.</p>
-                <FormTriagem 
+                <h1>Venda</h1>
+                <p>Cadastre o registro da venda realizada.</p>
+                <FormVenda 
                 handleSubmit={id ? updatePost : createPost} 
-                btnText={id ? "Salvar alterações" : "Cadastrar triagem" }
+                btnText={id ? "Salvar alterações" : "Cadastrar venda" }
                 recordData={registro}
                 />
-                <LinkButton to="/registrosTriagem" text="Consultar Triagens" />
+                <LinkButton to="/registrosTriagem" text="Consultar Vendas" />
             </div>
         </Container>
     )
 }
 
-export default Triagem;
+export default Venda; 

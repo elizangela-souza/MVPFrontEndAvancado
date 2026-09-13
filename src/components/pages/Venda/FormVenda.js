@@ -9,7 +9,7 @@ import SubmitButton from '../../Form/SubmitButton.js';
 import styles from './../Styles.module.css';
 
 
-function FormTriagem({ handleSubmit, btnText, recordData }) {
+function FormVenda({ handleSubmit, btnText, recordData }) {
 
     const [categorias, setCategorias] = useState([]);
     const [registro, setRegistro] = useState(recordData || {});
@@ -38,7 +38,7 @@ function FormTriagem({ handleSubmit, btnText, recordData }) {
     const submit = (e) => {
     e.preventDefault();
 
-    if (!registro.matricula || !registro.categoria || !registro.data_triagem || !registro.kg_material) {
+    if (!registro.cnpj || !registro.categoria || !registro.data_triagem || !registro.kg_material) {
       setErrorMsg("Por favor, preencha todos os campos antes de enviar.");
       return;
     }
@@ -62,17 +62,17 @@ function FormTriagem({ handleSubmit, btnText, recordData }) {
         })
     }
     
-    const isFormValid = registro.matricula && registro.categoria && registro.data_triagem && registro.kg_material;
+    const isFormValid = registro.cnpj && registro.categoria && registro.data_triagem && registro.kg_material;
 
     return (
         <form onSubmit={submit} className={styles.form}>
             <Input
                 type="text"
-                text="Matrícula do cooperado que realizou a triagem"
-                name="matricula"
+                text="CNPJ da empresa cliente"
+                name="cnpj"
                 handleOnChange={handleChange}
-                placeholder="Digite a matrícula CXXXXX"
-                value={registro.matricula || ''}
+                placeholder="Digite o cnpj sem caracteres especiais"
+                value={registro.cnpj || ''}
             />
             <Select
                 text="Selecione a categoria do material"
@@ -83,12 +83,12 @@ function FormTriagem({ handleSubmit, btnText, recordData }) {
             />
             <Input
                 type="date"
-                text="Data da triagem"
-                name="data_triagem"
+                text="Data da venda"
+                name="data_venda"
                 handleOnChange={handleChange}
                 min="1900-01-01"
                 max="3000-12-31"
-                value={registro.data_triagem || ''}
+                value={registro.data_venda || ''}
             />
             <Input
                 type="number"
@@ -105,4 +105,4 @@ function FormTriagem({ handleSubmit, btnText, recordData }) {
     )
 }
 
-export default FormTriagem;
+export default FormVenda;

@@ -1,19 +1,19 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate,  useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import LinkButton from '../../layout/LinkButton.js';
 import Container from '../../layout/Container.js';
 
-import FormTriagem from './FormTriagem.js'
+import FormCliente from './FormCliente.js'
 import styles from './../Styles.module.css';
 
-function Triagem() {
-    const navigate = useNavigate()
-    const { id } = useParams()
+function Cliente() {
+    const navigate = useNavigate();
+    const { id } = useParams();
     const [registro, setRegistro] = useState(null);
 
     function createPost(registro) {
-        fetch('http://localhost:5000/triagens', {
+        fetch('http://127.0.0.1:5000/cadastrar_cliente', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -23,29 +23,29 @@ function Triagem() {
             .then((resp) => resp.json())
             .then((data) => {
                 console.log(data)
-                navigate('/registrosTriagem', { state: { message: 'Registro cadastrado com sucesso!' } })
+                navigate('/registrosCliente', { state: { message:'Cliente registrado com sucesso!' } })
             })
             .catch(err => console.log(err))
     }
 
     useEffect(() => {
         if (id) {
-            fetch(`http://localhost:5000/triagens/${id}`)
+            fetch(`http://127.0.0.1:5000/buscar_cliente?cnpj=${id}`)
                 .then((resp) => resp.json())
                 .then((data) => setRegistro(data))
                 .catch(err => console.log(err));
         }
     }, [id]);
 
-    function updatePost(registro) {
-        fetch(`http://localhost:5000/triagens/${id}`, {
+    function updatePost(registro) {      
+        fetch(`http://127.0.0.1:5000/atualizar_cliente`, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(registro),
         })
             .then((resp) => resp.json())
             .then((data) => {
-                navigate('/registrosTriagem', { state: { message: 'Registro atualizado com sucesso!' } });
+                navigate('/registrosCliente', { state: { message: 'Registro atualizado com sucesso!' } });
             })
             .catch(err => console.log(err));
     }
@@ -53,17 +53,17 @@ function Triagem() {
     return (
         <Container customClass="min-height">
             <div className={styles.page_container}>
-                <h1>Triagem</h1>
-                <p>Cadastre o registro da triagem realizada.</p>
-                <FormTriagem 
+                <h1>Cliente: Empresa recicladora</h1>
+                <p>Cadastre uma empresa para depois registrar as vendas realizadas a ela.</p>
+                <FormCliente 
                 handleSubmit={id ? updatePost : createPost} 
-                btnText={id ? "Salvar alterações" : "Cadastrar triagem" }
+                btnText={id ? "Salvar alterações" : "Cadastrar Cliente" }
                 recordData={registro}
                 />
-                <LinkButton to="/registrosTriagem" text="Consultar Triagens" />
+                <LinkButton to="/registrosCliente" text="Consultar Clientes" />
             </div>
         </Container>
     )
 }
 
-export default Triagem;
+export default Cliente
