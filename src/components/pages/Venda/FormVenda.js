@@ -38,7 +38,7 @@ function FormVenda({ handleSubmit, btnText, recordData }) {
     const submit = (e) => {
     e.preventDefault();
 
-    if (!registro.cnpj || !registro.categoria || !registro.data_triagem || !registro.kg_material) {
+    if (!registro.cnpj || !registro.categoria || !registro.data_venda || !registro.kg_material) {
       setErrorMsg("Por favor, preencha todos os campos antes de enviar.");
       return;
     }
@@ -62,13 +62,13 @@ function FormVenda({ handleSubmit, btnText, recordData }) {
         })
     }
     
-    const isFormValid = registro.cnpj && registro.categoria && registro.data_triagem && registro.kg_material;
+    const isFormValid = registro.cnpj && registro.categoria && registro.data_venda && registro.kg_material;
 
     return (
         <form onSubmit={submit} className={styles.form}>
             <Input
                 type="text"
-                text="CNPJ da empresa cliente"
+                text="CNPJ do cliente"
                 name="cnpj"
                 handleOnChange={handleChange}
                 placeholder="Digite o cnpj sem caracteres especiais"

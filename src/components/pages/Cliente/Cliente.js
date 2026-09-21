@@ -53,7 +53,7 @@ function Cliente() {
     return (
         <Container customClass="min-height">
             <div className={styles.page_container}>
-                <h1>Cliente: Empresa recicladora</h1>
+                <h1>Cliente - Empresa recicladora</h1>
                 <p>Cadastre uma empresa para depois registrar as vendas realizadas a ela.</p>
                 <FormCliente 
                 handleSubmit={id ? updatePost : createPost} 

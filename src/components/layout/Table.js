@@ -9,7 +9,7 @@ function Table({ columns, data, onEdit, onDelete }) {
                 <thead>
                     <tr>
                         {columns.map((col) => (
-                            <th key={col.acessor}>{col.header}</th>
+                            <th key={col.accessor}>{col.header}</th>
                         ))}
                         <th>Ações</th> 
                     </tr>
@@ -18,8 +18,8 @@ function Table({ columns, data, onEdit, onDelete }) {
                     {data.map((row) => (
                         <tr key={row.id}>
                             {columns.map((col) => (
-                                <td key={col.acessor}>
-                                    {col.render ? col.render(row) : row[col.acessor]}
+                                <td key={col.accessor}>
+                                    {col.render ? col.render(row) : row[col.accessor]}
                                 </td>
                             ))}
                             <td>

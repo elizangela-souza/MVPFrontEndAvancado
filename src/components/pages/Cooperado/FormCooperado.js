@@ -21,7 +21,7 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
 
     const submit = (e) => {
     e.preventDefault();
-    if (!registro.nome || !registro.matricula || !registro.cpf || !registro.data_nasc || !registro.celular) {
+    if (!registro.nome || !registro.matricula || !registro.cpf || !registro.data_nascimento || !registro.telefone) {
       setErrorMsg("Por favor, preencha todos os campos antes de enviar.");
       return;
     }
@@ -34,7 +34,7 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
         console.log(registro)
     }
 
-    const isFormValid = registro.nome && registro.matricula && registro.cpf && registro.data_nasc && registro.celular;
+    const isFormValid = registro.nome && registro.matricula && registro.cpf && registro.data_nascimento && registro.telefone;
 
     return (
         <form onSubmit={submit} className={styles.form}>
@@ -65,19 +65,19 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
             <Input
                 type="date"
                 text="Data de nascimento"
-                name="data_nasc"
+                name="data_nascimento"
                 handleOnChange={handleChange}
                 min="1900-01-01"
                 max="3000-12-31"
-                value={registro.data_nasc || ''}
+                value={registro.data_nascimento || ''}
             />
             <Input
                 type="text"
-                text="Número do celular"
-                name="celular"
+                text="Número do telefone"
+                name="telefone"
                 handleOnChange={handleChange}
                 placeholder="(99)99999-9999"
-                value={registro.celular || ''}
+                value={registro.telefone || ''}
             />
             {errorMsg && <Message type="error" msg={errorMsg} />}
             <SubmitButton text={btnText} disabled={!isFormValid}/>

@@ -23,26 +23,25 @@ function TableCooperado() {
   const navigate = useNavigate()
 
   const columns = [
-    {header: "ID", acessor: "id"},
-    { header: "Matrícula", acessor: "matricula" },
-    { header: "Nome", acessor: "nome" },
-    { header: "CPF", acessor: "cpf" },
-    { header: "Data de nascimento", acessor: "data_nasc" },
-    { header: "Contato", acessor: "celular" }
+    { header: "Matrícula", accessor: "matricula" },
+    { header: "Nome", accessor: "nome" },
+    { header: "CPF", accessor: "cpf" },
+    { header: "Data de nascimento", accessor: "data_nascimento" },
+    { header: "Contato", accessor: "telefone" }
   ]
 
   useEffect(() => {
     setTimeout(() => {
-      fetch('http://localhost:5000/cooperados', {
+      fetch('http://127.0.0.1:5000/buscar_cooperados', {
         method: 'GET',
         headers: {
-          'Content-Type': 'aplication/json',
+          'Content-Type': 'application/json',
         },
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          setRegistros(data);
+          console.log("Resposta da API:", data);
+          setRegistros(data.cooperados);
           setLoading(false);
         })
         .catch((err) => {
@@ -62,7 +61,7 @@ function TableCooperado() {
   };
 
   const confirmDelete = (row) => {
-    fetch(`http://localhost:5000/cooperados/${row.id}`, {
+    fetch(`http://127.0.0.1:5000/deletar_cooperado?id=${row.id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })

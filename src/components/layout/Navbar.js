@@ -7,7 +7,7 @@ function Navbar() {
     return (
         <nav className={styles.navbar}>
             <div>
-                <Link to="/">
+                <Link to="/" class={styles.list}>
                     <img src={logo} alt="Banner com a logo da coopperativa de reciclagem" />
                 </Link>
                 <ul class={styles.list}>
@@ -19,6 +19,12 @@ function Navbar() {
                     </li>
                     <li className={styles.item}>
                         <Link to="/triagem">Triagem</Link>
+                    </li>
+                    <li className={styles.item}>
+                        <Link to="/cliente">Cliente</Link>
+                    </li>
+                    <li className={styles.item}>
+                        <Link to="/venda">Venda</Link>
                     </li>
                 </ul>
             </div>
