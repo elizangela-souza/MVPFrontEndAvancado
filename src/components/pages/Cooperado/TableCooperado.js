@@ -26,7 +26,12 @@ function TableCooperado() {
     { header: "Matrícula", accessor: "matricula" },
     { header: "Nome", accessor: "nome" },
     { header: "CPF", accessor: "cpf" },
-    { header: "Data de nascimento", accessor: "data_nascimento" },
+    {
+      header: "Data de nascimento", accessor: "data_nascimento", render: (row) => {
+        const date = new Date(row.data_nascimento);
+        return isNaN(date) ? '-' : date.toLocaleDateString('pt-BR');
+      }
+    },
     { header: "Contato", accessor: "telefone" }
   ]
 

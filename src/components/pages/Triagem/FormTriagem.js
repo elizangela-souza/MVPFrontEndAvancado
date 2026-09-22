@@ -8,9 +8,12 @@ import SubmitButton from '../../Form/SubmitButton.js';
 
 import styles from './../Styles.module.css';
 
+import {MATERIAL_CATEGORIAS } from '../../utils/materialCategorias.js';
+
 
 function FormTriagem({ handleSubmit, btnText, recordData }) {
 
+    
     const [categorias, setCategorias] = useState([]);
     const [registro, setRegistro] = useState(recordData || {});
     const [errorMsg, setErrorMsg] = useState("");
@@ -77,7 +80,7 @@ function FormTriagem({ handleSubmit, btnText, recordData }) {
             <Select
                 text="Selecione a categoria do material"
                 name="categoria"
-                options={categorias}
+                options={MATERIAL_CATEGORIAS}
                 handleOnChange={handleCategory}
                 value={registro.categoria ? registro.categoria.id : ''}
             />

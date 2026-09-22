@@ -14,7 +14,7 @@ function TableVenda() {
   const [registros, setRegistros] = useState([]);
   const [registroSelecionado, setRegistroSelecionado] = useState(null);
   const [loading, setLoading] = useState(true);
-   const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [registroMsg, setRegistroMsg] = useState('');
 
   const location = useLocation();
@@ -27,7 +27,12 @@ function TableVenda() {
     { header: "Empresa cliente", acessor: "cnpj" },
     { header: "Categoria", acessor: "categoria.name", render: (row) => row.categoria.name },
     { header: "Quantidade(Kg)", acessor: "kg_material" },
-    { header: "Data", acessor: "data_venda" }
+    {
+      header: "Data", acessor: "data_venda", render: (row) => {
+        const date = new Date(row.data_venda);
+        return isNaN(date) ? '-' : date.toLocaleDateString('pt-BR');
+      }
+    }
   ]
 
   useEffect(() => {
@@ -48,7 +53,7 @@ function TableVenda() {
           console.log(err)
           setLoading(false);
         })
-    }, 1000) 
+    }, 1000)
   }, [])
 
   const handleEdit = (row) => {
