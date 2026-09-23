@@ -1,5 +1,5 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 import LinkButton from '../../layout/LinkButton.js';
 import Container from '../../layout/Container.js';
@@ -44,7 +44,7 @@ function Venda() {
                 btnText={"Cadastrar venda"}
                 recordData={registro}
                 />
-                <LinkButton to="/registrosTriagem" text="Consultar Vendas" />
+                <LinkButton to="/registrosVenda" text="Consultar Vendas" />
             </div>
         </Container>
     )

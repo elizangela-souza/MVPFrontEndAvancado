@@ -21,7 +21,7 @@ function TableVenda() {
 
   const columns = [
     { header: "Código", accessor: "id_registro" },
-    { header: "Empresa cliente", accessor: "cnpj" },
+    { header: "Empresa cliente", accessor: "id_cliente" },
     { header: "Categoria", accessor: "categoria.name", render: (row) => {
         const cat = MATERIAL_CATEGORIAS.find(c => c.id === row.id_material)
         return cat ? cat.name : row.id_material
@@ -61,7 +61,7 @@ function TableVenda() {
     <Container customClass="min-height">
       <div className={styles.registro_container}>
         <div className={styles.title_container}>
-          <h1>Triagens realizadas</h1>
+          <h1>Vendas realizadas</h1>
           <LinkButton to="/Venda" text="Novo registro" />
         </div>
         {message && <Message type="sucess" msg={message} />}

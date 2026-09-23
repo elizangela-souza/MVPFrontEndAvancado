@@ -31,7 +31,6 @@ function FormCliente({ handleSubmit, btnText, recordData }) {
 
     function handleChange(e) {
         setRegistro({ ...registro, [e.target.name]: e.target.value })
-        console.log(registro)
     }
 
     const isFormValid = registro.nome && registro.cnpj && registro.cep && registro.email && registro.telefone;

@@ -33,7 +33,7 @@ function Cliente() {
     }
 
     useEffect(() => {
-        if (id) {
+        if (cnpj) {
             fetch(`http://127.0.0.1:5000/buscar_cliente?cnpj=${cnpj}`)
                 .then((resp) => resp.json())
                 .then((data) => {
