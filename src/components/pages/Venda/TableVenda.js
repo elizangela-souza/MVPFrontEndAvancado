@@ -33,7 +33,8 @@ function TableVenda() {
         const date = new Date(row.data_venda);
         return isNaN(date) ? '-' : date.toLocaleDateString('pt-BR');
       }
-    }
+    },
+    { header: "Valor da venda($)", accessor: "valor_venda" }
   ]
 
   useEffect(() => {
@@ -46,7 +47,6 @@ function TableVenda() {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log("Vendas:", data);
           setRegistros(data.vendas || []);
           setLoading(false);
         })
@@ -76,7 +76,7 @@ function TableVenda() {
             />
           }
           {!loading && registros.length === 0 && (
-            <p className={styles.no_records}>Não há registros de triagens!</p>
+            <p className={styles.no_records}>Não há registros de vendas!</p>
           )}
         </Container>
       </div>
