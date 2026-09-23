@@ -45,7 +45,6 @@ function TableCooperado() {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log("Resposta da API:", data);
           setRegistros(data.cooperados);
           setLoading(false);
         })

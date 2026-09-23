@@ -21,7 +21,7 @@ function FormCliente({ handleSubmit, btnText, recordData }) {
 
     const submit = (e) => {
     e.preventDefault();
-    if (!registro.nome || !registro.cnpj || !registro.cep || !registro.email || !registro.celular) {
+    if (!registro.nome || !registro.cnpj || !registro.cep || !registro.email || !registro.telefone) {
       setErrorMsg("Por favor, preencha todos os campos antes de enviar.");
       return;
     }
@@ -34,7 +34,7 @@ function FormCliente({ handleSubmit, btnText, recordData }) {
         console.log(registro)
     }
 
-    const isFormValid = registro.nome && registro.cnpj && registro.cep && registro.email && registro.celular;
+    const isFormValid = registro.nome && registro.cnpj && registro.cep && registro.email && registro.telefone;
 
     return (
         <form onSubmit={submit} className={styles.form}>
@@ -72,11 +72,11 @@ function FormCliente({ handleSubmit, btnText, recordData }) {
             />
             <Input
                 type="text"
-                text="Número do celular"
-                name="celular"
+                text="Número de telefone"
+                name="telefone"
                 handleOnChange={handleChange}
                 placeholder="(99)99999-9999"
-                value={registro.celular || ''}
+                value={registro.telefone || ''}
             />
             {errorMsg && <Message type="error" msg={errorMsg} />}
             <SubmitButton text={btnText} disabled={!isFormValid}/>
@@ -84,4 +84,4 @@ function FormCliente({ handleSubmit, btnText, recordData }) {
     )
 }
 
-export default FormCliente
+export default FormCliente;

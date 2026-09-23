@@ -79,7 +79,7 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
             />
             <Input
                 type="text"
-                text="Número do telefone"
+                text="Número de telefone"
                 name="telefone"
                 handleOnChange={handleChange}
                 placeholder="(99)99999-9999"
@@ -91,4 +91,4 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
     )
 }
 
-export default FormCooperado
+export default FormCooperado;

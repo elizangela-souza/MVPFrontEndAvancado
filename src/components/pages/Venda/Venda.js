@@ -9,16 +9,22 @@ import styles from './../Styles.module.css';
 
 function Venda() {
     const navigate = useNavigate()
-    const { id } = useParams()
-    const [registro, setRegistro] = useState(null);
+    const [registro] = useState(null);
 
     function createPost(registro) {
-        fetch('http://localhost:5000/triagens', {
+        fetch('http://127.0.0.1:5000/cadastrar_venda', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(registro),
+            body: JSON.stringify(
+                {
+                    id_cliente: registro.cnpj,
+                    id_material: parseInt(registro.categoria.id),
+                    data_venda: registro.data_venda,
+                    kg_material: parseFloat(registro.kg_material)
+                }
+            ),
         })
             .then((resp) => resp.json())
             .then((data) => {
@@ -28,36 +34,14 @@ function Venda() {
             .catch(err => console.log(err))
     }
 
-    useEffect(() => {
-        if (id) {
-            fetch(`http://localhost:5000/triagens/${id}`)
-                .then((resp) => resp.json())
-                .then((data) => setRegistro(data))
-                .catch(err => console.log(err));
-        }
-    }, [id]);
-
-    function updatePost(registro) {
-        fetch(`http://localhost:5000/triagens/${id}`, {
-            method: "PUT",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(registro),
-        })
-            .then((resp) => resp.json())
-            .then((data) => {
-                navigate('/registrosVenda', { state: { message: 'Registro atualizado com sucesso!' } });
-            })
-            .catch(err => console.log(err));
-    }
-
     return (
         <Container customClass="min-height">
             <div className={styles.page_container}>
                 <h1>Venda</h1>
                 <p>Cadastre o registro da venda realizada.</p>
                 <FormVenda 
-                handleSubmit={id ? updatePost : createPost} 
-                btnText={id ? "Salvar alterações" : "Cadastrar venda" }
+                handleSubmit={createPost} 
+                btnText={"Cadastrar venda"}
                 recordData={registro}
                 />
                 <LinkButton to="/registrosTriagem" text="Consultar Vendas" />

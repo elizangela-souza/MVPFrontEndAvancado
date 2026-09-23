@@ -23,29 +23,29 @@ function TableCliente() {
   const navigate = useNavigate()
 
   const columns = [
-    {header: "CNPJ", acessor: "cnpj"},
-    { header: "Nome", acessor: "nome" },
-    { header: "CEP", acessor: "cep" },
-    { header: "Rua/Avenida", acessor: "logradouro" },
-    { header: "Bairro", acessor: "bairro" },
-    { header: "Cidade", acessor: "cidade" },
-    { header: "UF", acessor: "uf" },
-    { header: "E-mail", acessor: "email" },
-    { header: "Contato", acessor: "celular" }
+    {header: "CNPJ", accessor: "cnpj"},
+    { header: "Nome", accessor: "nome" },
+    { header: "CEP", accessor: "cep" },
+    { header: "Rua/Avenida", accessor: "logradouro" },
+    { header: "Bairro", accessor: "bairro" },
+    { header: "Cidade", accessor: "cidade" },
+    { header: "UF", accessor: "uf" },
+    { header: "E-mail", accessor: "email" },
+    { header: "Contato", accessor: "telefone" }
   ]
 
   useEffect(() => {
     setTimeout(() => {
-      fetch('http://localhost:5000/cooperados', {
+      fetch('http://127.0.0.1:5000/buscar_clientes', {
         method: 'GET',
         headers: {
-          'Content-Type': 'aplication/json',
+          'Content-Type': 'application/json',
         },
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          setRegistros(data);
+          console.log("Resposta da API:", data);
+          setRegistros(data.clientes);
           setLoading(false);
         })
         .catch((err) => {
@@ -56,7 +56,7 @@ function TableCliente() {
   }, [])
 
   const handleEdit = (row) => {
-    navigate(`/cliente/editar/${row.id}`)
+    navigate(`/cliente/editar/${row.cnpj}`)
   };
 
   const handleDeleteClick = (row) => {
@@ -65,14 +65,15 @@ function TableCliente() {
   };
 
   const confirmDelete = (row) => {
-    fetch(`http://localhost:5000/cooperados/${row.id}`, {
+    fetch(`http://127.0.0.1:5000/deletar_cliente?cnpj=${registroSelecionado.cnpj}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
       .then(() => {
-        setRegistros(registros.filter((r) => r.id !== registroSelecionado.id));
+        setRegistros(registros.filter((r) => r.cnpj !== registroSelecionado.cnpj));
         setRegistroMsg('Registro removido com sucesso!');
         setShowModal(false);
+        console.log("deletar", registroSelecionado); 
       })
       .catch((err) => console.log(err));
   };
@@ -94,12 +95,13 @@ function TableCliente() {
               data={registros}
               onEdit={handleEdit}
               onDelete={handleDeleteClick}
+              showActions={true}
             />
           }
           {showModal && (
             <Modal
               title="Confirmar exclusão"
-              message={`Deseja excluir o registro ${registroSelecionado?.id}?`}
+              message={`Deseja excluir o registro ${registroSelecionado?.cnpj}?`}
               onConfirm={confirmDelete}
               onCancel={() => setShowModal(false)}
             />

@@ -9,7 +9,7 @@ import styles from './../Styles.module.css';
 
 function Cliente() {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { cnpj } = useParams();
     const [registro, setRegistro] = useState(null);
 
     function createPost(registro) {
@@ -22,20 +22,27 @@ function Cliente() {
         })
             .then((resp) => resp.json())
             .then((data) => {
-                console.log(data)
-                navigate('/registrosCliente', { state: { message:'Cliente registrado com sucesso!' } })
+                console.log(data);
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    navigate('/registrosCliente', { state: { message:'Cliente registrado com sucesso!' } })
+                }         
             })
             .catch(err => console.log(err))
     }
 
     useEffect(() => {
         if (id) {
-            fetch(`http://127.0.0.1:5000/buscar_cliente?cnpj=${id}`)
+            fetch(`http://127.0.0.1:5000/buscar_cliente?cnpj=${cnpj}`)
                 .then((resp) => resp.json())
-                .then((data) => setRegistro(data))
+                .then((data) => {
+                    console.log("Resposta:", data);
+                    setRegistro(data);
+                })
                 .catch(err => console.log(err));
         }
-    }, [id]);
+    }, [cnpj]);
 
     function updatePost(registro) {      
         fetch(`http://127.0.0.1:5000/atualizar_cliente`, {
@@ -56,8 +63,8 @@ function Cliente() {
                 <h1>Cliente - Empresa recicladora</h1>
                 <p>Cadastre uma empresa para depois registrar as vendas realizadas a ela.</p>
                 <FormCliente 
-                handleSubmit={id ? updatePost : createPost} 
-                btnText={id ? "Salvar alterações" : "Cadastrar Cliente" }
+                handleSubmit={cnpj ? updatePost : createPost} 
+                btnText={cnpj ? "Salvar alterações" : "Cadastrar Cliente" }
                 recordData={registro}
                 />
                 <LinkButton to="/registrosCliente" text="Consultar Clientes" />

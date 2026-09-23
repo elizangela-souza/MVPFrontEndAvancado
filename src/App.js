@@ -25,10 +25,9 @@ function App() {
             <Route path="/cooperado/editar/:matricula" element={<Cooperado />} />
             <Route path="/registrosCooperado" element={<TableCooperado />} />
             <Route path="/triagem" element={<Triagem />} />
-            <Route path="/triagem/editar/:id" element={<Triagem />} />
             <Route path="/registrosTriagem" element={<TableTriagem />} />
             <Route path="/cliente" element={<Cliente />} />
-            <Route path="/cliente/editar/:id" element={<Cliente />} />
+            <Route path="/cliente/editar/:cnpj" element={<Cliente />} />
             <Route path="/registrosCliente" element={<TableCliente />} />
             <Route path="/venda" element={<Venda />} />
             <Route path="/registrosVenda" element={<TableVenda />} />
