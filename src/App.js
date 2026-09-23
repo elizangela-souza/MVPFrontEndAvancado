@@ -22,7 +22,7 @@ function App() {
         <Route element={<MainLayout />}>    
             <Route index element={<Home />} />
             <Route path="/cooperado" element={<Cooperado />} />
-            <Route path="/cooperado/editar/:id" element={<Cooperado />} />
+            <Route path="/cooperado/editar/:matricula" element={<Cooperado />} />
             <Route path="/registrosCooperado" element={<TableCooperado />} />
             <Route path="/triagem" element={<Triagem />} />
             <Route path="/triagem/editar/:id" element={<Triagem />} />

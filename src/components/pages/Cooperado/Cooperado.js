@@ -9,7 +9,7 @@ import styles from './../Styles.module.css';
 
 function Cooperado() {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { matricula } = useParams();
     const [registro, setRegistro] = useState(null);
 
     function createPost(registro) {
@@ -34,13 +34,16 @@ function Cooperado() {
     }
 
     useEffect(() => {
-        if (id) {
-            fetch(`http://127.0.0.1:5000/buscar_cooperado?matricula=${id}`)
+        if (matricula) {
+            fetch(`http://127.0.0.1:5000/buscar_cooperado?matricula=${matricula}`)
                 .then((resp) => resp.json())
-                .then((data) => setRegistro(data))
+                .then((data) => {
+                    console.log("Resposta:", data);
+                    setRegistro(data);
+                })
                 .catch(err => console.log(err));
         }
-    }, [id]);
+    }, [matricula]);
 
     function updatePost(registro) {
         fetch(`http://127.0.0.1:5000/atualizar_cooperado`, {
@@ -61,8 +64,8 @@ function Cooperado() {
                 <h1>Cooperado/a</h1>
                 <p>Cadastre um cooperado/a para depois registrar suas triagens.</p>
                 <FormCooperado
-                    handleSubmit={id ? updatePost : createPost}
-                    btnText={id ? "Salvar alterações" : "Cadastrar Cooperado/a"}
+                    handleSubmit={matricula ? updatePost : createPost}
+                    btnText={matricula ? "Salvar alterações" : "Cadastrar Cooperado/a"}
                     recordData={registro}
                 />
                 <LinkButton to="/registrosCooperado" text="Consultar Cooperados/as" />

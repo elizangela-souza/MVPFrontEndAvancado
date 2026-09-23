@@ -57,7 +57,7 @@ function TableCooperado() {
   }, [])
 
   const handleEdit = (row) => {
-    navigate(`/cooperado/editar/${row.id}`)
+    navigate(`/cooperado/editar/${row.matricula}`)
   };
 
   const handleDeleteClick = (row) => {
@@ -65,15 +65,16 @@ function TableCooperado() {
     setShowModal(true);
   };
 
-  const confirmDelete = (row) => {
-    fetch(`http://127.0.0.1:5000/deletar_cooperado?id=${row.id}`, {
+  const confirmDelete = () => {
+    fetch(`http://127.0.0.1:5000/deletar_cooperado?matricula=${registroSelecionado.matricula}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
       .then(() => {
-        setRegistros(registros.filter((r) => r.id !== registroSelecionado.id));
+        setRegistros(registros.filter((r) => r.matricula !== registroSelecionado.matricula));
         setRegistroMsg('Registro removido com sucesso!');
         setShowModal(false);
+        console.log("deletar", registroSelecionado); 
       })
       .catch((err) => console.log(err));
   };
@@ -95,12 +96,13 @@ function TableCooperado() {
               data={registros}
               onEdit={handleEdit}
               onDelete={handleDeleteClick}
+              showActions={true}
             />
           }
           {showModal && (
             <Modal
               title="Confirmar exclusão"
-              message={`Deseja excluir o registro ${registroSelecionado?.id}?`}
+              message={`Deseja excluir o registro ${registroSelecionado?.matricula}?`}
               onConfirm={confirmDelete}
               onCancel={() => setShowModal(false)}
             />

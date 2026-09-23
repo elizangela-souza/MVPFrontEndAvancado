@@ -14,8 +14,15 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
 
     useEffect(() => {
         if (recordData) {
-            setRegistro(recordData);
+            const registroFormatado = {
+                ...recordData,
+                data_nascimento: recordData.data_nascimento 
+                ? new Date(recordData.data_nascimento).toISOString().split('T')[0]
+                : ''
+            }
+            setRegistro(registroFormatado);
         }
+        console.log("RECORDDATA", recordData);
     }, [recordData]);
 
 
@@ -31,7 +38,6 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
 
     function handleChange(e) {
         setRegistro({ ...registro, [e.target.name]: e.target.value })
-        console.log(registro)
     }
 
     const isFormValid = registro.nome && registro.matricula && registro.cpf && registro.data_nascimento && registro.telefone;

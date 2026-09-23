@@ -2,7 +2,7 @@ import { BsPencil, BsFillTrashFill } from 'react-icons/bs';
 
 import styles from './Table.module.css';
 
-function Table({ columns, data, onEdit, onDelete }) {
+function Table({ columns, data, onEdit, onDelete, showActions = true }) {
     return (
         <div className={styles.table_container}>
             <table className={styles.table}>
@@ -11,7 +11,7 @@ function Table({ columns, data, onEdit, onDelete }) {
                         {columns.map((col) => (
                             <th key={col.accessor}>{col.header}</th>
                         ))}
-                        <th>Ações</th> 
+                        {showActions && <th>Ações</th> }
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +22,7 @@ function Table({ columns, data, onEdit, onDelete }) {
                                     {col.render ? col.render(row) : row[col.accessor]}
                                 </td>
                             ))}
+                            {showActions && (
                             <td>
                                 <button
                                     className={styles.edit_btn}
@@ -36,6 +37,7 @@ function Table({ columns, data, onEdit, onDelete }) {
                                     <BsFillTrashFill />
                                 </button>
                             </td>
+                            )}
                         </tr>
                     ))}
                 </tbody>
