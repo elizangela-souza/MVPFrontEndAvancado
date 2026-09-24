@@ -19,3 +19,11 @@
     flex-direction: column;
     justify-content: flex-start;
 }
+
+.graficos {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
