@@ -1,8 +1,8 @@
-import { BsPencil, BsFillTrashFill } from 'react-icons/bs';
+import { BsPencil, BsFillTrashFill, BsPrinter } from 'react-icons/bs';
 
 import styles from './Table.module.css';
 
-function Table({ columns, data, onEdit, onDelete, showActions = true }) {
+function Table({ columns, data, onEdit, onDelete, onPrint, showActions = true, showPrint = true }) {
     return (
         <div className={styles.table_container}>
             <table className={styles.table}>
@@ -11,7 +11,7 @@ function Table({ columns, data, onEdit, onDelete, showActions = true }) {
                         {columns.map((col) => (
                             <th key={col.accessor}>{col.header}</th>
                         ))}
-                        {showActions && <th>Ações</th> }
+                        {showActions && <th>Ações</th>}
                     </tr>
                 </thead>
                 <tbody>
@@ -23,21 +23,30 @@ function Table({ columns, data, onEdit, onDelete, showActions = true }) {
                                 </td>
                             ))}
                             {showActions && (
-                            <td>
-                                <button
-                                    className={styles.edit_btn}
-                                    onClick={() => onEdit(row)}
-                                >
-                                    <BsPencil />
-                                </button>
-                                <button
-                                    className={styles.delete_btn}
-                                    onClick={() => onDelete(row)}
-                                >
-                                    <BsFillTrashFill />
-                                </button>
-                            </td>
+                                <td>
+                                    <button
+                                        className={styles.edit_btn}
+                                        onClick={() => onEdit(row)}
+                                    >
+                                        <BsPencil />
+                                    </button>
+                                    <button
+                                        className={styles.delete_btn}
+                                        onClick={() => onDelete(row)}
+                                    >
+                                        <BsFillTrashFill />
+                                    </button>
+                                    {showPrint && (
+                                        <button
+                                            className={styles.print_btn}
+                                            onClick={() => onPrint(row)}
+                                        >
+                                            <BsPrinter />
+                                        </button>
+                                    )}
+                                </td>
                             )}
+
                         </tr>
                     ))}
                 </tbody>

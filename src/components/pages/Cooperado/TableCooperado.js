@@ -96,6 +96,7 @@ function TableCooperado() {
               onEdit={handleEdit}
               onDelete={handleDeleteClick}
               showActions={true}
+              showPrint={false}
             />
           }
           {showModal && (

@@ -1,22 +1,27 @@
 # Projeto Cooperativa de Reciclagem
 
->Este projeto é o módulo Interface do MVP da Sprint: Desenvolvimento Back-end Avançado, que visou atender a necessidade de armazenamento e consulta das informações de uma cooperativa de reciclagem.
-
-Para isso, foi desenvolvido:
-- Aba inicial com gráfico de estoque e de vendas com card de orientações de uso da aplicação para os usuários;
-- Formulário para a inclusão de registros de cooperado, de cliente, de triagem e de venda;
-- Formulário de edição de registros de cooperados e de clientes;
-- Tabelas de consulta das informações de Cooperado, de Cliente, de Registro de Triagem e de Registros de Venda.
+>Este projeto é o módulo Interface do MVP da Sprint: Desenvolvimento Back-end Avançado. Ele buscou atender a necessidade de armazenamento e consulta das informações de uma cooperativa de reciclagem.
 
 ## Funcionalidades
 
-- Inclusão, atualização, consulta e exclusão de registros.
+- Gráficos: estoque e vendas por mês em tempo real.
+
+- Formulários: inclusão e edição de cooperados, clientes, triagens e vendas.
+
+- Tabelas dinâmicas: consulta detalhada de registros.
+
+- Opção de gerar PDF para imprimir etique de envio com informações dos clientes.
 
 ## Tecnologias utilizadas
 
-As principais ferramentas utlizadas foram:
+As principais ferramentas utilizadas foram:
 
 - React
+- React Router
+- Recharts
+- React-icons
+- Jspdf
+- jspdf-autoTable
 
 ## Fontes, icones e imagens utilizadas
 - Fontes: [Google Fonts](https://fonts.google.com/)
@@ -27,12 +32,14 @@ As principais ferramentas utlizadas foram:
 ## Como executar com Dockerfile
 
 ### 1. Utilizar o comando no terminal `docker build -t interface .`
-Para construir a imagem.
+Para construir a imagem a partir do Dockerfile.
+
+Caso esteja utilizando Windows, deve primeiro abrir o aplicativo [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/?uuid=BBEA0E54-C959-4598-A02E-B324AE057A35#system-requirements) no seu computador e ter instalado o WSL2 ou uma máquina virtual interna.
 
 ### 2. Utilizar o comando no terminal `docker run -p 3000:80 interface`
-Para rodar o container.
+Para criar e inicializar o container a partir da imagem interface já construída.
 
-### 3. Acessar o link []() no navegador
+### 3. Acessar aplicação no link [http://localhost:3000](http://localhost:3000) no navegador
 
 ### 4. Executar a aplicação back-end 
 Clone o [repositório da API Back-end](https://github.com/elizangela-souza/MVPback-end.git) e siga as orientações no arquivo README.md para execução.

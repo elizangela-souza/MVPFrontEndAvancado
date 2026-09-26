@@ -20,14 +20,14 @@ function FormCliente({ handleSubmit, btnText, recordData }) {
 
 
     const submit = (e) => {
-    e.preventDefault();
-    if (!registro.nome || !registro.cnpj || !registro.cep || !registro.email || !registro.telefone) {
-      setErrorMsg("Por favor, preencha todos os campos antes de enviar.");
-      return;
-    }
-    setErrorMsg(""); 
-    handleSubmit(registro);
-  };
+        e.preventDefault();
+        if (!registro.nome || !registro.cnpj || !registro.cep || !registro.email || !registro.telefone) {
+            setErrorMsg("Por favor, preencha todos os campos antes de enviar.");
+            return;
+        }
+        setErrorMsg("");
+        handleSubmit(registro);
+    };
 
     function handleChange(e) {
         setRegistro({ ...registro, [e.target.name]: e.target.value })
@@ -78,7 +78,7 @@ function FormCliente({ handleSubmit, btnText, recordData }) {
                 value={registro.telefone || ''}
             />
             {errorMsg && <Message type="error" msg={errorMsg} />}
-            <SubmitButton text={btnText} disabled={!isFormValid}/>
+            <SubmitButton text={btnText} disabled={!isFormValid} />
         </form>
     )
 }

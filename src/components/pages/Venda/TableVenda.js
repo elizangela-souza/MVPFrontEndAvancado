@@ -73,6 +73,7 @@ function TableVenda() {
               columns={columns}
               data={registros}
               showActions={false}
+              showPrint={false}
             />
           }
           {!loading && registros.length === 0 && (

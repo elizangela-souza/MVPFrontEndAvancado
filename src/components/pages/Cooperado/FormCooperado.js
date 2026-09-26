@@ -16,9 +16,9 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
         if (recordData) {
             const registroFormatado = {
                 ...recordData,
-                data_nascimento: recordData.data_nascimento 
-                ? new Date(recordData.data_nascimento).toISOString().split('T')[0]
-                : ''
+                data_nascimento: recordData.data_nascimento
+                    ? new Date(recordData.data_nascimento).toISOString().split('T')[0]
+                    : ''
             }
             setRegistro(registroFormatado);
         }
@@ -27,14 +27,14 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
 
 
     const submit = (e) => {
-    e.preventDefault();
-    if (!registro.nome || !registro.matricula || !registro.cpf || !registro.data_nascimento || !registro.telefone) {
-      setErrorMsg("Por favor, preencha todos os campos antes de enviar.");
-      return;
-    }
-    setErrorMsg(""); 
-    handleSubmit(registro);
-  };
+        e.preventDefault();
+        if (!registro.nome || !registro.matricula || !registro.cpf || !registro.data_nascimento || !registro.telefone) {
+            setErrorMsg("Por favor, preencha todos os campos antes de enviar.");
+            return;
+        }
+        setErrorMsg("");
+        handleSubmit(registro);
+    };
 
     function handleChange(e) {
         setRegistro({ ...registro, [e.target.name]: e.target.value })
@@ -86,7 +86,7 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
                 value={registro.telefone || ''}
             />
             {errorMsg && <Message type="error" msg={errorMsg} />}
-            <SubmitButton text={btnText} disabled={!isFormValid}/>
+            <SubmitButton text={btnText} disabled={!isFormValid} />
         </form>
     )
 }

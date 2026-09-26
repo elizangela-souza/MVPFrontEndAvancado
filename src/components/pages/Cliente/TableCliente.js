@@ -1,5 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { jsPDF } from 'jspdf';
+import { autoTable } from 'jspdf-autotable';
 
 import Message from '../../layout/Message.js';
 import Container from '../../layout/Container.js';
@@ -23,7 +25,7 @@ function TableCliente() {
   const navigate = useNavigate()
 
   const columns = [
-    {header: "CNPJ", accessor: "cnpj"},
+    { header: "CNPJ", accessor: "cnpj" },
     { header: "Nome", accessor: "nome" },
     { header: "CEP", accessor: "cep" },
     { header: "Rua/Avenida", accessor: "logradouro" },
@@ -73,9 +75,31 @@ function TableCliente() {
         setRegistros(registros.filter((r) => r.cnpj !== registroSelecionado.cnpj));
         setRegistroMsg('Registro removido com sucesso!');
         setShowModal(false);
-        console.log("deletar", registroSelecionado); 
+        console.log("deletar", registroSelecionado);
       })
       .catch((err) => console.log(err));
+  };
+
+  //Função para gerar PDF
+  const handlePrint = (cliente) => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("Etiqueta de Envio - Cooperativa", 14, 20);
+
+    autoTable(doc, {
+      startY: 30,
+      head: [["Campo", "Valor"]],
+      body: [
+        ["Nome", cliente.nome],
+        ["CNPJ", cliente.cnpj],
+        ["Email", cliente.email],
+        ["Telefone", cliente.telefone],
+        ["Endereço", `${cliente.logradouro}, ${cliente.bairro}, ${cliente.cidade} - ${cliente.uf}, CEP: ${cliente.cep}`],
+      ],
+    });
+
+    doc.save(`cliente_${cliente.nome}.pdf`);
   };
 
   return (
@@ -95,7 +119,9 @@ function TableCliente() {
               data={registros}
               onEdit={handleEdit}
               onDelete={handleDeleteClick}
+              onPrint={handlePrint}
               showActions={true}
+              showPrint={true}
             />
           }
           {showModal && (

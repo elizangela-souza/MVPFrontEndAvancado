@@ -1,0 +1,23 @@
+.card_container span {
+    color: #027979;
+    padding: 0 .2em;
+}
+
+.card_container p {
+    margin-bottom: 1.5em;
+    color: #383838;
+}
+
+.card_container h2 {
+    margin-bottom: .5em;
+}
+
+.card_container ul {
+    margin-bottom: 1.5em;
+}
+
+.card_container ul li {
+    margin-bottom: .5em;
+    margin-left: .8em;
+    color: #383838;
+}
