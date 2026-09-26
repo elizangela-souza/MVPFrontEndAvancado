@@ -60,7 +60,7 @@ function Home() {
                             data={dataMateriais}
                             xKey="categoria"
                             yKey="quantidade"
-                            color="#8884d8"
+                            color="#1c9be6"
                         />
                     </div>
                     <div>
