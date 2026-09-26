@@ -61,3 +61,12 @@ Clone o [repositório da API Back-end](https://github.com/elizangela-souza/MVPba
 
 ## Fluxograma
 ![fluxograma](./src/img/fluxograma.png)
+
+### API Externa ViaCEP
+Ao incluir um novo cliente no formulário disponível no Menu Cliente, a interface aciona a operação cadastrar_cliente da API Back-end que, ao receber o código de endereço postal(CEP), consulta o endereço do cliente no [webservice ViaCEP](https://viacep.com.br/) e armazena os dados retornados por ele na Tabela Cliente. O mesmo processo ocorre quando o usuário edita um registro do cliente já armazenado, só que agora na operação atualizar_cliente da API Back-end.
+
+Para acessar o webservice, um CEP no formato de {8} dígitos deve ser fornecido, exemplo: "01001000".
+Após o CEP, deve ser fornecido o tipo de retorno desejado, que deve ser "json" ou "xml".
+
+Exemplo de consulta de CEP:
+viacep.com.br/ws/01001000/json/
