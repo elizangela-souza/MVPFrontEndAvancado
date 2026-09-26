@@ -25,7 +25,7 @@
   background-color: #fafafa;
 }
 
-.edit_btn, .delete_btn {
+.edit_btn, .delete_btn, .print_btn {
   background: none;
   border: none;
   cursor: pointer;
@@ -39,6 +39,10 @@
 
 .delete_btn {
   color: #da0404; 
+}
+
+.print_btn {
+  color: #45a049;
 }
 
 /* Responsividade */

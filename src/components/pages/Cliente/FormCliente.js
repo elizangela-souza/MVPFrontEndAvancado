@@ -8,27 +8,20 @@ import SubmitButton from '../../Form/SubmitButton.js';
 import styles from './../Styles.module.css';
 
 
-function FormCooperado({ handleSubmit, btnText, recordData }) {
+function FormCliente({ handleSubmit, btnText, recordData }) {
     const [registro, setRegistro] = useState(recordData || {})
     const [errorMsg, setErrorMsg] = useState("");
 
     useEffect(() => {
         if (recordData) {
-            const registroFormatado = {
-                ...recordData,
-                data_nascimento: recordData.data_nascimento
-                    ? new Date(recordData.data_nascimento).toISOString().split('T')[0]
-                    : ''
-            }
-            setRegistro(registroFormatado);
+            setRegistro(recordData);
         }
-        console.log("RECORDDATA", recordData);
     }, [recordData]);
 
 
     const submit = (e) => {
         e.preventDefault();
-        if (!registro.nome || !registro.matricula || !registro.cpf || !registro.data_nascimento || !registro.telefone) {
+        if (!registro.nome || !registro.cnpj || !registro.cep || !registro.email || !registro.telefone) {
             setErrorMsg("Por favor, preencha todos os campos antes de enviar.");
             return;
         }
@@ -40,7 +33,7 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
         setRegistro({ ...registro, [e.target.name]: e.target.value })
     }
 
-    const isFormValid = registro.nome && registro.matricula && registro.cpf && registro.data_nascimento && registro.telefone;
+    const isFormValid = registro.nome && registro.cnpj && registro.cep && registro.email && registro.telefone;
 
     return (
         <form onSubmit={submit} className={styles.form}>
@@ -49,33 +42,32 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
                 text="Nome"
                 name="nome"
                 handleOnChange={handleChange}
-                placeholder="Digite o nome completo"
+                placeholder="Digite o nome da empresa"
                 value={registro.nome || ''}
             />
             <Input
                 type="text"
-                text="Matrícula"
-                name="matricula"
+                text="CNPJ"
+                name="cnpj"
                 handleOnChange={handleChange}
-                placeholder="Digite a matrícula CXXXXX"
-                value={registro.matricula || ''}
+                placeholder="Digite o cnpj sem caracteres especiais"
+                value={registro.cnpj || ''}
             />
             <Input
                 type="text"
-                text="CPF"
-                name="cpf"
+                text="CEP"
+                name="cep"
                 handleOnChange={handleChange}
                 placeholder="Digite somente números"
-                value={registro.cpf || ''}
+                value={registro.cep || ''}
             />
             <Input
-                type="date"
-                text="Data de nascimento"
-                name="data_nascimento"
+                type="text"
+                text="E-mail"
+                name="email"
                 handleOnChange={handleChange}
-                min="1900-01-01"
-                max="3000-12-31"
-                value={registro.data_nascimento || ''}
+                placeholder="xxxxx@email.com"
+                value={registro.email || ''}
             />
             <Input
                 type="text"
@@ -91,4 +83,4 @@ function FormCooperado({ handleSubmit, btnText, recordData }) {
     )
 }
 
-export default FormCooperado;
+export default FormCliente;

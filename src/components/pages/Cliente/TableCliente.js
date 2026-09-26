@@ -1,5 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { jsPDF } from 'jspdf';
+import { autoTable } from 'jspdf-autotable';
 
 import Message from '../../layout/Message.js';
 import Container from '../../layout/Container.js';
@@ -10,7 +12,7 @@ import Modal from "../../Form/Modal.js";
 
 import styles from './../Styles.module.css';
 
-function TableCooperado() {
+function TableCliente() {
   const [registros, setRegistros] = useState([]);
   const [registroSelecionado, setRegistroSelecionado] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,21 +25,20 @@ function TableCooperado() {
   const navigate = useNavigate()
 
   const columns = [
-    { header: "Matrícula", accessor: "matricula" },
+    { header: "CNPJ", accessor: "cnpj" },
     { header: "Nome", accessor: "nome" },
-    { header: "CPF", accessor: "cpf" },
-    {
-      header: "Data de nascimento", accessor: "data_nascimento", render: (row) => {
-        const date = new Date(row.data_nascimento);
-        return isNaN(date) ? '-' : date.toLocaleDateString('pt-BR');
-      }
-    },
+    { header: "CEP", accessor: "cep" },
+    { header: "Rua/Avenida", accessor: "logradouro" },
+    { header: "Bairro", accessor: "bairro" },
+    { header: "Cidade", accessor: "cidade" },
+    { header: "UF", accessor: "uf" },
+    { header: "E-mail", accessor: "email" },
     { header: "Contato", accessor: "telefone" }
   ]
 
   useEffect(() => {
     setTimeout(() => {
-      fetch('http://127.0.0.1:5000/buscar_cooperados', {
+      fetch('http://127.0.0.1:5000/buscar_clientes', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +46,8 @@ function TableCooperado() {
       })
         .then((res) => res.json())
         .then((data) => {
-          setRegistros(data.cooperados);
+          console.log("Resposta da API:", data);
+          setRegistros(data.clientes);
           setLoading(false);
         })
         .catch((err) => {
@@ -56,7 +58,7 @@ function TableCooperado() {
   }, [])
 
   const handleEdit = (row) => {
-    navigate(`/cooperado/editar/${row.matricula}`)
+    navigate(`/cliente/editar/${row.cnpj}`)
   };
 
   const handleDeleteClick = (row) => {
@@ -64,26 +66,48 @@ function TableCooperado() {
     setShowModal(true);
   };
 
-  const confirmDelete = () => {
-    fetch(`http://127.0.0.1:5000/deletar_cooperado?matricula=${registroSelecionado.matricula}`, {
+  const confirmDelete = (row) => {
+    fetch(`http://127.0.0.1:5000/deletar_cliente?cnpj=${registroSelecionado.cnpj}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
       .then(() => {
-        setRegistros(registros.filter((r) => r.matricula !== registroSelecionado.matricula));
+        setRegistros(registros.filter((r) => r.cnpj !== registroSelecionado.cnpj));
         setRegistroMsg('Registro removido com sucesso!');
         setShowModal(false);
-        console.log("deletar", registroSelecionado); 
+        console.log("deletar", registroSelecionado);
       })
       .catch((err) => console.log(err));
+  };
+
+  //Função para gerar PDF
+  const handlePrint = (cliente) => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("Etiqueta de Envio - Cooperativa", 14, 20);
+
+    autoTable(doc, {
+      startY: 30,
+      head: [["Campo", "Valor"]],
+      body: [
+        ["Nome", cliente.nome],
+        ["CNPJ", cliente.cnpj],
+        ["Email", cliente.email],
+        ["Telefone", cliente.telefone],
+        ["Endereço", `${cliente.logradouro}, ${cliente.bairro}, ${cliente.cidade} - ${cliente.uf}, CEP: ${cliente.cep}`],
+      ],
+    });
+
+    doc.save(`cliente_${cliente.nome}.pdf`);
   };
 
   return (
     <Container customClass="min-height">
       <div className={styles.registro_container}>
         <div className={styles.title_container}>
-          <h1> Lista de Cooperados/as</h1>
-          <LinkButton to="/Cooperado" text="Novo registro" />
+          <h1> Lista de Empresas clientes</h1>
+          <LinkButton to="/Cliente" text="Novo registro" />
         </div>
         {message && <Message type="sucess" msg={message} />}
         {registroMsg && <Message type="sucess" msg={registroMsg} />}
@@ -95,20 +119,21 @@ function TableCooperado() {
               data={registros}
               onEdit={handleEdit}
               onDelete={handleDeleteClick}
+              onPrint={handlePrint}
               showActions={true}
-              showPrint={false}
+              showPrint={true}
             />
           }
           {showModal && (
             <Modal
               title="Confirmar exclusão"
-              message={`Deseja excluir o registro ${registroSelecionado?.matricula}?`}
+              message={`Deseja excluir o registro ${registroSelecionado?.cnpj}?`}
               onConfirm={confirmDelete}
               onCancel={() => setShowModal(false)}
             />
           )}
           {!loading && registros.length === 0 && (
-            <p className={styles.no_records}>Não há registros de cooperados!</p>
+            <p className={styles.no_records}>Não há registros de clientes!</p>
           )}
         </Container>
       </div>
@@ -116,4 +141,4 @@ function TableCooperado() {
   )
 }
 
-export default TableCooperado;
+export default TableCliente;
